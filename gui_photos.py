@@ -3,8 +3,18 @@ import streamlit as st
 from scipy.stats import norm
 import os
 
-img_dir = "CP_images"
-img_props = "Image_Properties_CP.csv"
+if "image_set" not in st.session_state:
+    image_set = "Photos"
+else:
+    image_set = st.session_state["image_set"]
+
+if image_set == "Photos":
+    img_dir = "CP_images"
+    img_props = "Image_Properties_CP.csv"
+else:
+    img_dir = "LD_images"
+    img_props = "Image_Properties_LD.csv"
+
 z_transformed = True
 
 img_df = pd.read_csv(img_props)
@@ -18,6 +28,7 @@ if z_transformed:
 
 prop = st.selectbox("Sort by:", props)
 asc_desc = st.radio("Direction:", ["Ascending", "Descending"])
+image_set = st.radio("Image set:", ["Photos", "Line drawings"], key="image_set")
 
 img_df = img_df.sort_values(prop, ascending=asc_desc == "Ascending")
 
