@@ -19,7 +19,7 @@ z_transformed = True
 
 img_df = pd.read_csv(img_props)
 img_df["bias - memorability"] = img_df["bias"] - img_df["memorability"]
-img_df["|bias - memorability|"] = np.abs(img_df["bias"] - img_df["memorability"])
+img_df["|bias - memorability|"] = (img_df["bias"] - img_df["memorability"]).abs()
 props = list(img_df.columns)
 props = [prop for prop in props if prop not in ("hits", "misses", "false_alarms", "correct_rejections", "subject", "block", "Unnamed: 0", "Unnamed: 48", "Image size (pixels)", "Aspect ratio")]
 props.reverse()
