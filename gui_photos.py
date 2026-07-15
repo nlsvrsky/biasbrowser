@@ -23,6 +23,7 @@ img_df["|bias - memorability|"] = (img_df["bias"] - img_df["memorability"]).abs(
 props = list(img_df.columns)
 props = [prop for prop in props if prop not in ("hits", "misses", "false_alarms", "correct_rejections", "subject", "block", "Unnamed: 0", "Unnamed: 48", "Image size (pixels)", "Aspect ratio")]
 props.reverse()
+props = props[2:] + props[:2]
 
 if z_transformed:
     img_df["HR"] = norm.cdf(img_df["HR"])
